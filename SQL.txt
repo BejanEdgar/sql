@@ -1,0 +1,81 @@
+-- Crearea bazei de date
+CREATE DATABASE SimpluManagementPersonal;
+USE SimpluManagementPersonal;
+
+-- Tabelul pentru angajați
+CREATE TABLE Angajati (
+    AngajatID INT PRIMARY KEY AUTO_INCREMENT,
+    Nume VARCHAR(50),
+    Prenume VARCHAR(50),
+    Email VARCHAR(100),
+    DepartamentID INT,
+    PostID INT
+);
+
+-- Tabelul pentru departamente
+CREATE TABLE Departamente (
+    DepartamentID INT PRIMARY KEY AUTO_INCREMENT,
+    NumeDepartament VARCHAR(100)
+);
+
+-- Tabelul pentru posturi
+CREATE TABLE Posturi (
+    PostID INT PRIMARY KEY AUTO_INCREMENT,
+    TitluPost VARCHAR(100)
+);
+
+-- Tabelul pentru proiecte
+CREATE TABLE Proiecte (
+    ProiectID INT PRIMARY KEY AUTO_INCREMENT,
+    NumeProiect VARCHAR(100)
+);
+
+
+
+------SimpluManagement
+-- Inserarea departamentelor
+INSERT INTO Departamente (NumeDepartament) VALUES
+('IT'),
+('Marketing');
+
+-- Inserarea posturilor
+INSERT INTO Posturi (TitluPost) VALUES
+('Programator'),
+('Specialist Marketing');
+
+-- Inserarea angajaților
+INSERT INTO Angajati (Nume, Prenume, Email, DepartamentID, PostID) VALUES
+('Popescu', 'Andrei', 'andrei.popescu@companie.com', 1, 1),
+('Ionescu', 'Maria', 'maria.ionescu@companie.com', 2, 2);
+
+-- Inserarea proiectelor
+INSERT INTO Proiecte (NumeProiect) VALUES
+('Dezvoltare Software'),
+('Promovare Campanie');
+
+------------Angajati
+SELECT * FROM Angajati;
+SELECT 
+    a.Nume, 
+    a.Prenume, 
+    d.NumeDepartament, 
+    p.TitluPost 
+FROM Angajati a
+JOIN Departamente d ON a.DepartamentID = d.DepartamentID
+JOIN Posturi p ON a.PostID = p.PostID;
+
+-------------Proiecte
+SELECT * FROM Proiecte;
+
+
+------------Departamente
+UPDATE Departamente
+SET NumeDepartament = 'Resurse Umane'
+WHERE DepartamentID = 2;
+
+
+
+-----------Angajati adaugare
+INSERT INTO Angajati (Nume, Prenume, Email, DepartamentID, PostID)
+VALUES ('Vasilescu', 'Ioana', 'ioana.vasilescu@companie.com', 2, 2);
+
